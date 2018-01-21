@@ -769,6 +769,35 @@ class TreeViewAdditionalTestCases(unittest.TestCase):
         self.assertEquals(len(birds.children()), 2)
         self.assertEquals(new_pigeon.children(), [])
 
+    def testIsEnabled(self):
+        """Make sure tree view item method IsEnabled() works as expected"""
+        self.dlg.TVS_CHECKBOXES.click_input()
+
+        # Test enabled item in different states
+        # Selected
+        birds = self.ctrl.GetItem(r'\Birds')
+        birds.Select()
+        self.assertEquals(birds.IsEnabled(), True)
+
+        birds.click_input()
+        self.assertEquals(birds.IsEnabled(), True)
+
+        birds.Expand()
+        self.assertEquals(birds.IsEnabled(), True)
+
+        # Unselected
+        dogs = self.ctrl.GetItem(r'\Dogs')
+        dogs.Select()
+        self.assertEquals(birds.IsEnabled(), True)
+
+        birds.Collapse()
+        dogs.Select()
+        self.assertEquals(birds.IsEnabled(), True)
+
+        birds.click_input()
+        dogs.Select()
+        self.assertEquals(birds.IsEnabled(), True)
+
 
 class HeaderTestCases(unittest.TestCase):
 
