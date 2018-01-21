@@ -1402,6 +1402,13 @@ class _treeview_element(object):
         return win32defines.TVIS_EXPANDED == (win32defines.TVIS_EXPANDED & self.state())
     # Non PEP-8 alias
     IsExpanded = is_expanded
+	
+    #----------------------------------------------------------------
+    def is_enabled(self):
+        """Indicate that the TreeView item is enabled or not"""
+        return self.state() & 0x4000 != 0x4000
+    # Non PEP-8 alias
+    IsEnabled = is_enabled
 
     #----------------------------------------------------------------
     def _readitem(self):
